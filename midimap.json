@@ -1,0 +1,197 @@
+{
+  "relay-mapping": [
+    {
+      "note": 60,
+      "relay": 101
+    },
+    {
+      "note": 61,
+      "relay": 102
+    },
+    {
+      "note": 62,
+      "relay": 103
+    },
+    {
+      "note": 63,
+      "relay": 104
+    },
+    {
+      "note": 64,
+      "relay": 105
+    },
+    {
+      "note": 65,
+      "relay": 106
+    },
+    {
+      "note": 66,
+      "relay": 107
+    },
+    {
+      "note": 67,
+      "relay": 108
+    },
+    {
+      "note": 68,
+      "relay": 109
+    },
+    {
+      "note": 69,
+      "relay": 110
+    },
+    {
+      "note": 70,
+      "relay": 111
+    },
+    {
+      "note": 71,
+      "relay": 112
+    },
+    {
+      "note": 72,
+      "relay": 113
+    },
+    {
+      "note": 73,
+      "relay": 114
+    },
+    {
+      "note": 74,
+      "relay": 115
+    },
+    {
+      "note": 75,
+      "relay": 116
+    },
+    {
+      "note": 76,
+      "relay": 117
+    },
+    {
+      "note": 77,
+      "relay": 118
+    },
+    {
+      "note": 78,
+      "relay": 119
+    },
+    {
+      "note": 79,
+      "relay": 120
+    },
+    {
+      "note": 80,
+      "relay": 121
+    },
+    {
+      "note": 81,
+      "relay": 122
+    },
+    {
+      "note": 82,
+      "relay": 123
+    },
+    {
+      "note": 83,
+      "relay": 124
+    },
+    {
+      "note": 84,
+      "relay": 125
+    },
+    {
+      "note": 85,
+      "relay": 126
+    },
+    {
+      "note": 86,
+      "relay": 127
+    },
+    {
+      "note": 87,
+      "relay": 128
+    },
+    {
+      "note": 88,
+      "relay": 129
+    },
+    {
+      "note": 89,
+      "relay": 130
+    },
+    {
+      "note": 90,
+      "relay": 131
+    },
+    {
+      "note": 91,
+      "relay": 132
+    },
+    {
+      "note": 92,
+      "relay": 133
+    },
+    {
+      "note": 93,
+      "relay": 134
+    },
+    {
+      "note": 94,
+      "relay": 135
+    },
+    {
+      "note": 95,
+      "relay": 136
+    },
+    {
+      "note": 96,
+      "relay": 137
+    },
+    {
+      "note": 97,
+      "relay": 138
+    },
+    {
+      "note": 98,
+      "relay": 139
+    },
+    {
+      "note": 99,
+      "relay": 140
+    },
+    {
+      "note": 100,
+      "relay": 141
+    },
+    {
+      "note": 101,
+      "relay": 142
+    },
+    {
+      "note": 102,
+      "relay": 143
+    },
+    {
+      "note": 103,
+      "relay": 144
+    },
+    {
+      "note": 104,
+      "relay": 145
+    },
+    {
+      "note": 105,
+      "relay": 146
+    },
+    {
+      "note": 106,
+      "relay": 147
+    },
+    {
+      "note": 107,
+      "relay": 148
+    }
+
+  ]
+}

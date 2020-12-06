@@ -1,0 +1,12 @@
+{
+  "song-mapping": [
+    {
+      "index": 1,
+      "audio": "/home/pi/dev/raspilights/jingle.wav",
+      "midi": "/home/pi/dev/raspilights/demo_jingle.mid",
+      "vol": "95%",
+      "ticks": 15360,
+      "offset": 1.95
+    }
+  ]
+}
