@@ -4,7 +4,7 @@ This is a crazy project for controlling a musical holiday lights show.  I built 
 
 ![](https://github.com/scooterhanson/raspilights/blob/main/xmaslightboard1.jpg)
 
-The breakout board is this piece here:
+Each MCP23017 chip can take the i2c control input and assign addresses for up to 16 outputs, increasing the options from the standard GPIO pins on the Pi.  This breakout board uses 3 MCP23017s for a total of 48 relays (6 boards of 8).  I should note that each relay board is powered from a 12V laptop power supply that goes through a beefy 5V regulator.  The breakout board is powered by 5V and 3V3 from the Pi.
 
 ![](https://github.com/scooterhanson/raspilights/blob/main/xmaslighti2cboard.jpeg)
 
@@ -14,5 +14,4 @@ The file *raspilights.py* was my original attempt that uses a subprocess call to
 
 *pg_raspilights.py* uses [pygame](https://www.pygame.org/news) to playback the wav file and it's timed to start as soon as the midi messages start getting parsed into the thread queue.
 
-So, the only major dependencies are mido and pygame.
 
