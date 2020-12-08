@@ -2,8 +2,8 @@
   "song-mapping": [
     {
       "index": 1,
-      "audio": "/home/pi/dev/raspilights/jingle.wav",
-      "midi": "/home/pi/dev/raspilights/demo_jingle.mid",
+      "audio": "/home/pi/dev/raspilights/calibrate.wav",
+      "midi": "/home/pi/dev/raspilights/calibrate_1.mid",
       "vol": "95%",
       "ticks": 15360,
       "offset": 1.95
