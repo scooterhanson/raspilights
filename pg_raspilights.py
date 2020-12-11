@@ -1,10 +1,13 @@
-from multiprocessing import Process, Queue
+import Queue
+import threading
+#from multiprocessing import Process, Queue
 import wiringpi2 as wiringpi
 import time
 import mido
 import json
 import subprocess
 import pygame
+import sys
 
 def setupIO():
     wiringpi.wiringPiSetup()                    # initialise wiringpi
@@ -47,43 +50,43 @@ def setupAudio(vol):
     subprocess.call(["amixer","sset","PCM",vol])
 
 def playAudio(audio, offset):
-    #print 'audio offset: %s' % offset
-    #time.sleep(offset)  #we may need to bring this back in some way
-    print 'playing audio: %s' % audio
+#    while q.empty():
+#        # wait until the midi messages have been loaded into the queue
+#        continue
+    print 'audio offset: %s' % offset
+    time.sleep(offset)
+    print 'loading audio: %s' % audio
     pygame.mixer.init()
     song = pygame.mixer.Sound(audio)
-    while q.empty():
-        # wait until the midi messages have been loaded into the queue
-        continue
-    print "playing"
+    print "playing audio"
     song.play()
     pygame.time.wait(int(song.get_length() * 1000)) #do we need this?
+    print "finished audio"
 
 def playMidi(song,q):
     mid = mido.MidiFile(song['midi'])
-    mid.ticks_per_beat = song['ticks']#15550 #15360 orig
-    print 'ticks per beat: %s' % mid.ticks_per_beat
-    q.put("start")
-    for msg in mid.play():
-        q.put(msg)
-    q.put("break")
-
-def workQueue(q):
-    while 1:
-        time.sleep(.01) # This will put the tiniest delay in between relays firing.  Keeps things from backing up
-        msg = q.get()
-        if str(msg) == "break":
-            break
-        elif str(msg) != "start":
+    #mid.ticks_per_beat = song['ticks']#15550 #15360 orig
+    #print 'ticks per beat: %s' % mid.ticks_per_beat
+    print "playing midi"
+    for msg in mid.play(meta_messages=True):
+    #for msg in mid.play():
+        #print str(msg)
+        q.put("start")
+        try:
             msg_items = str(msg).split();
             msg_note_val = msg_items[2]
             note_num = int(msg_note_val.split('=')[1])
             relay = midimapping[note_num]
-            if(msg_items[0] == 'note_on'):
-                wiringpi.digitalWrite(relay, 0)
-            if(msg_items[0] == 'note_off'):
-                wiringpi.digitalWrite(relay, 1)
-
+        except:
+            #print "Bad message"
+            continue
+        if(msg_items[0] == 'note_on'):
+            #time.sleep(.01)
+            wiringpi.digitalWrite(relay, 0)
+        if(msg_items[0] == 'note_off'):
+            #time.sleep(.01)
+            wiringpi.digitalWrite(relay, 1)
+    print "finished midi"
 
 setupIO()
 allPinsOff()
@@ -97,21 +100,33 @@ while int(hour) < maxHour:
     for audio,song in playlist.items():
         try:
             setupAudio(song['vol'])
-            q = Queue()
-            p1 = Process(target = workQueue, args = (q,))
-            p1.start()
-            p2 = Process(target = playMidi, args = (song,q,))
-            p2.start()
-            p3 = Process(target = playAudio, args = (audio,song['offset']))
-            p3.start()
-            p1.join()
-            p2.join()
-            p3.join()
+            #q = Queue()
+            q = Queue.Queue()
+            t1 = threading.Thread(target=playMidi, args = (song,q,))
+            t1.start()
+
+            t2 = threading.Thread(target = playAudio, args = (audio,song['offset'],))
+            t2.start()
+
+
+            t1.join()
+            t2.join()
+
+#            p1 = Process(target = playMidi, args = (song,q,))
+#            p1.start()
+#            p2 = Process(target = playAudio, args = (audio,song['offset'],))
+#            p2.start()
+#            print "a"
+#            p1.join()
+#            print "b"
+#            p2.join()
+#            print "c"
             hour = time.strftime("%H")
             allPinsOff()
         except KeyboardInterrupt:
             allPinsOff()
-            p1.terminate()
-            p2.terminate()
-            p3.terminate()
+            t1.terminate()
+            t2.terminate()
+#            p1.terminate()
+#            p2.terminate()
             sys.exit(1)
